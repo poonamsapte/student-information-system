@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Student Information</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial;
+height:100vh;
+background-image:url("https://images.unsplash.com/photo-1523240795612-9a054b0db644");
+background-size:cover;
+background-position:center;
+background-repeat: no-repeat;
+}
+
+.box{
+
+width:400px;
+padding:20px;
+
+background:rgba(255,255,255,0.9);
+
+position:absolute;
+top:50%;
+left:50%;
+
+transform:translate(-50%,-50%) scale(0.5);
+
+animation:zoom 1s forwards;
+
+border-radius:10px;
+
+max-height:90vh;
+overflow:auto;
+
+z-index:1;
+
+}
+
+@keyframes zoom{
+to{
+transform:translate(-50%,-50%) scale(1);
+}
+}
+
+h2{
+text-align:center;
+}
+
+input, select{
+width:100%;
+padding:8px;
+margin:5px 0;
+}
+
+button{
+width:100%;
+padding:10px;
+background:blue;
+color:white;
+border:none;
+}
+
+button:hover{
+background:darkblue;
+}
+
+/* ✅ navbar */
+
+.navbar{
+position:absolute;
+top:10px;
+right:10px;
+z-index:1000;
+}
+
+.navbar button{
+padding:8px;
+margin:3px;
+background:#2c3e50;
+color:white;
+border:none;
+border-radius:5px;
+cursor:pointer;
+width:auto;
+}
+
+.navbar button:hover{
+background:#1a252f;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="navbar">
+
+<button onclick="location.href='/'">Home</button>
+<button onclick="location.href='/admin'">Admin</button>
+<button onclick="location.href='/teacher'">Teacher</button>
+<button onclick="location.href='/student'">Student</button>
+<button onclick="location.href='/courses'">Courses</button>
+<button onclick="location.href='/results'">Results</button>
+<button onclick="location.href='/contact'">Contact</button>
+<button onclick="location.href='/dashboard'">Dashboard</button>
+<button onclick="location.href='/login'">Login</button>
+
+</div>
+
+
+<div class="box">
+
+<h2>Student Information Form</h2>
+
+<form method="POST" action="/student">
+
+<label>Name</label>
+<input type="text" name="name">
+
+<label>Date of Birth</label>
+<input type="date" name="dob">
+
+<label>PRN Number</label>
+<input type="text" name="prn">
+
+<label>Aadhar Number</label>
+<input type="text" name="aadhar">
+
+<label>PAN Number</label>
+<input type="text" name="pan">
+
+<label>10th Marks</label>
+<input type="text" name="marks10">
+
+<label>12th Marks</label>
+<input type="text" name="marks12">
+
+<label>Course</label>
+<select name="course">
+<option>BCS</option>
+<option>BCA</option>
+<option>BSc</option>
+<option>MCA</option>
+</select>
+
+<button type="submit">Submit</button>
+
+</form>
+
+</div>
+
+</body>
+</html>

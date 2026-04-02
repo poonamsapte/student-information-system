@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Manage Teachers - Admin</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:Arial;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);min-height:100vh}
+        .navbar{background:rgba(44,62,80,0.95);padding:15px 30px;display:flex;justify-content:space-between;align-items:center}
+        .navbar h1{color:white;font-size:24px}
+        .nav-links button{background:#3498db;color:white;border:none;padding:10px 20px;margin:0 5px;border-radius:5px;cursor:pointer}
+        .container{max-width:1200px;margin:40px auto;padding:20px}
+        .content-card{background:rgba(255,255,255,0.95);padding:30px;border-radius:15px;box-shadow:0 10px 30px rgba(0,0,0,0.2)}
+        .section-title{color:#2c3e50;margin-bottom:20px;font-size:28px}
+        .add-form{background:#f8f9fa;padding:20px;border-radius:10px;margin-bottom:30px}
+        .form-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:15px;margin-bottom:15px}
+        input,select{width:100%;padding:12px;border:1px solid #ddd;border-radius:5px}
+        .btn{background:#667eea;color:white;border:none;padding:12px 25px;border-radius:5px;cursor:pointer}
+        .btn-danger{background:#e74c3c}
+        table{width:100%;border-collapse:collapse;margin-top:20px;background:white;box-shadow:0 5px 15px rgba(0,0,0,0.1)}
+        th{background:#2c3e50;color:white;padding:15px;text-align:left}
+        td{padding:12px;border-bottom:1px solid #ddd}
+        .flash-messages{position:fixed;top:80px;right:20px;z-index:1000}
+        .alert{padding:15px 20px;margin-bottom:10px;border-radius:5px;background:white;box-shadow:0 5px 15px rgba(0,0,0,0.2)}
+        .alert-success{border-left:4px solid #2ecc71;color:#27ae60}
+        .alert-error{border-left:4px solid #e74c3c;color:#c0392b}
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <h1>👨‍🏫 Manage Teachers</h1>
+        <div class="nav-links">
+            <button onclick="location.href='/admin/dashboard'">Dashboard</button>
+            <button onclick="location.href='/'">Home</button>
+            <button onclick="location.href='/logout'">Logout</button>
+        </div>
+    </div>
+    
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="flash-messages">
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+    
+    <div class="container">
+        <div class="content-card">
+            <h2 class="section-title">Add New Teacher</h2>
+            <form method="POST" class="add-form">
+                <div class="form-row">
+                    <input type="text" name="username" placeholder="Username" required>
+                    <input type="email" name="email" placeholder="Email" required>
+                    <input type="password" name="password" placeholder="Password" required>
+                </div>
+                <div class="form-row">
+                    <input type="text" name="name" placeholder="Full Name" required>
+                    <input type="text" name="qualification" placeholder="Qualification">
+                    <input type="text" name="specialization" placeholder="Subject Specialization">
+                </div>
+                <button type="submit" class="btn">➕ Add Teacher</button>
+            </form>
+            
+            <h2 class="section-title">All Teachers</h2>
+            <table>
+                <thead>
+                    <tr><th>ID</th><th>Name</th><th>Qualification</th><th>Specialization</th><th>Username</th><th>Email</th><th>Actions</th></tr>
+                </thead>
+                <tbody>
+                    {% for teacher in teachers %}
+                    <tr>
+                        <td>{{ teacher[0] }}</td>
+                        <td>{{ teacher[1] }}</td>
+                        <td>{{ teacher[2] }}</td>
+                        <td>{{ teacher[3] }}</td>
+                        <td>{{ teacher[4] }}</td>
+                        <td>{{ teacher[5] }}</td>
+                        <td><a href="/admin/teacher/delete/{{ teacher[0] }}"><button class="btn btn-danger">Delete</button></a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

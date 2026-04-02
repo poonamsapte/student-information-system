@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Dashboard</title>
+
+<style>
+
+body {
+  margin:0;
+  height:100vh;
+  background-image: url("https://images.unsplash.com/photo-1508780709619-79562169bc64");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+
+/* navbar */
+
+.navbar{
+position:absolute;
+top:10px;
+right:10px;
+z-index:1000;
+}
+
+.navbar button{
+padding:8px;
+margin:3px;
+background:#2c3e50;
+color:white;
+border:none;
+border-radius:5px;
+cursor:pointer;
+width:auto;
+}
+
+.navbar button:hover{
+background:#1a252f;
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+<div class="navbar">
+
+<button onclick="location.href='/'" color="white">Home</button>
+<button onclick="location.href='/admin'">Admin</button>
+<button onclick="location.href='/teacher'">Teacher</button>
+<button onclick="location.href='/student'">Student</button>
+<button onclick="location.href='/courses'">Courses</button>
+<button onclick="location.href='/results'">Results</button>
+<button onclick="location.href='/contact'">Contact</button>
+<button onclick="location.href='/dashboard'">Dashboard</button>
+<button onclick="location.href='/login'">Login</button>
+<button onclick="location.href='/logout'">Logout</button>
+
+</div>
+
+
+<a href="/view">
+<button>View Students</button>
+</a>
+
+
+
+
+</body>
+</html>

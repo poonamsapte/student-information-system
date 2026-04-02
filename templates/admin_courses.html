@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Manage Courses - Admin</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:Arial;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);min-height:100vh}
+        .navbar{background:rgba(44,62,80,0.95);padding:15px 30px;display:flex;justify-content:space-between;align-items:center}
+        .navbar h1{color:white;font-size:24px}
+        .nav-links button{background:#3498db;color:white;border:none;padding:10px 20px;margin:0 5px;border-radius:5px;cursor:pointer}
+        .container{max-width:1200px;margin:40px auto;padding:20px}
+        .content-card{background:rgba(255,255,255,0.95);padding:30px;border-radius:15px;box-shadow:0 10px 30px rgba(0,0,0,0.2)}
+        .section-title{color:#2c3e50;margin-bottom:20px;font-size:28px}
+        .add-form{background:#f8f9fa;padding:20px;border-radius:10px;margin-bottom:30px}
+        .form-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:15px;margin-bottom:15px}
+        input,select{width:100%;padding:12px;border:1px solid #ddd;border-radius:5px}
+        .btn{background:#667eea;color:white;border:none;padding:12px 25px;border-radius:5px;cursor:pointer}
+        .btn-danger{background:#e74c3c}
+        table{width:100%;border-collapse:collapse;margin-top:20px;background:white;box-shadow:0 5px 15px rgba(0,0,0,0.1)}
+        th{background:#2c3e50;color:white;padding:15px;text-align:left}
+        td{padding:12px;border-bottom:1px solid #ddd}
+        .flash-messages{position:fixed;top:80px;right:20px;z-index:1000}
+        .alert{padding:15px 20px;margin-bottom:10px;border-radius:5px;background:white;box-shadow:0 5px 15px rgba(0,0,0,0.2)}
+        .alert-success{border-left:4px solid #2ecc71;color:#27ae60}
+        .alert-error{border-left:4px solid #e74c3c;color:#c0392b}
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <h1>📚 Manage Courses</h1>
+        <div class="nav-links">
+            <button onclick="location.href='/admin/dashboard'">Dashboard</button>
+            <button onclick="location.href='/'">Home</button>
+            <button onclick="location.href='/logout'">Logout</button>
+        </div>
+    </div>
+    
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="flash-messages">
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+    
+    <div class="container">
+        <div class="content-card">
+            <h2 class="section-title">Add New Course</h2>
+            <form method="POST" class="add-form">
+                <div class="form-row">
+                    <input type="text" name="course_name" placeholder="Course Name" required>
+                    <input type="text" name="course_code" placeholder="Course Code" required>
+                    <input type="number" name="credits" placeholder="Credits">
+                </div>
+                <div class="form-row">
+                    <textarea name="description" placeholder="Description" style="width:100%;padding:12px;border:1px solid #ddd;border-radius:5px"></textarea>
+                </div>
+                <div class="form-row">
+                    <select name="teacher_id">
+                        <option value="">Assign Teacher (Optional)</option>
+                        {% for teacher in teachers %}
+                            <option value="{{ teacher[0] }}">{{ teacher[1] }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <button type="submit" class="btn">➕ Add Course</button>
+            </form>
+            
+            <h2 class="section-title">All Courses</h2>
+            <table>
+                <thead>
+                    <tr><th>ID</th><th>Course Name</th><th>Code</th><th>Description</th><th>Credits</th><th>Teacher</th><th>Actions</th></tr>
+                </thead>
+                <tbody>
+                    {% for course in courses %}
+                    <tr>
+                        <td>{{ course[0] }}</td>
+                        <td>{{ course[1] }}</td>
+                        <td>{{ course[2] }}</td>
+                        <td>{{ course[3] }}</td>
+                        <td>{{ course[4] }}</td>
+                        <td>{{ course[5] or 'Not Assigned' }}</td>
+                        <td><a href="/admin/course/delete/{{ course[0] }}"><button class="btn btn-danger">Delete</button></a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Admin Login</title>
+
+<style>
+
+body{
+margin:0;
+height:100vh;
+font-family:Arial;
+background-image:url("https://images.unsplash.com/photo-1523240795612-9a054b0db644");
+background-size:cover;
+background-position:center;
+background-repeat: no-repeat;
+}
+
+/* navbar */
+
+.navbar{
+position:absolute;
+top:10px;
+right:10px;
+}
+
+.navbar button{
+padding:8px;
+margin:3px;
+background:#2c3e50;
+color:white;
+border:none;
+border-radius:5px;
+cursor:pointer;
+width:auto;
+}
+
+.navbar button:hover{
+background:#1a252f;
+}
+
+
+/* login box */
+
+.box{
+
+width:350px;
+padding:20px;
+
+background:rgba(255,255,255,0.9);
+
+position:absolute;
+top:50%;
+left:50%;
+
+transform:translate(-50%,-50%);
+
+border-radius:10px;
+
+text-align:center;
+
+}
+
+input{
+width:100%;
+padding:8px;
+margin:5px 0;
+}
+
+.loginbtn{
+width:100%;
+padding:10px;
+background:blue;
+color:white;
+border:none;
+}
+
+.loginbtn:hover{
+background:darkblue;
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+<!-- ✅ Navbar -->
+
+<div class="navbar">
+
+<button onclick="location.href='/'">Home</button>
+<button onclick="location.href='/admin'">Admin</button>
+<button onclick="location.href='/teacher'">Teacher</button>
+<button onclick="location.href='/student'">Student</button>
+<button onclick="location.href='/courses'">Courses</button>
+<button onclick="location.href='/results'">Results</button>
+<button onclick="location.href='/contact'">Contact</button>
+<button onclick="location.href='/dashboard'">Dashboard</button>
+<button onclick="location.href='/login'">Login</button>
+
+</div>
+
+
+<!-- ✅ Admin Login -->
+
+<div class="box">
+
+<h2>Admin Login</h2>
+
+<form method="POST">
+
+<input type="text" name="username" placeholder="Username" required>
+
+<input type="password" name="password" placeholder="password" required>
+
+<button type="submit" class="loginbtn">Login</button>
+
+</form>
+
+</div>
+
+</body>
+</html>

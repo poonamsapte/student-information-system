@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Send Notification</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:Arial;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);min-height:100vh}
+        .navbar{background:rgba(44,62,80,0.95);padding:15px 30px;display:flex;justify-content:space-between;align-items:center}
+        .navbar h1{color:white}
+        .nav-links button{background:#3498db;color:white;border:none;padding:10px 20px;margin:0 5px;border-radius:5px;cursor:pointer}
+        .container{max-width:800px;margin:40px auto;padding:20px}
+        .content-card{background:rgba(255,255,255,0.95);padding:30px;border-radius:15px;box-shadow:0 10px 30px rgba(0,0,0,0.2)}
+        .section-title{color:#2c3e50;margin-bottom:20px;font-size:28px}
+        input,select,textarea{width:100%;padding:12px;margin:10px 0;border:1px solid #ddd;border-radius:5px}
+        textarea{height:150px;resize:vertical}
+        .btn{background:#667eea;color:white;border:none;padding:12px 25px;border-radius:5px;cursor:pointer;width:100%}
+        .flash-messages{position:fixed;top:80px;right:20px;z-index:1000}
+        .alert{padding:15px 20px;margin-bottom:10px;border-radius:5px;background:white;box-shadow:0 5px 15px rgba(0,0,0,0.2)}
+        .alert-success{border-left:4px solid #2ecc71;color:#27ae60}
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <h1>📢 Send Notification</h1>
+        <div class="nav-links">
+            <button onclick="location.href='/notifications'">View Notifications</button>
+        </div>
+    </div>
+    
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="flash-messages">
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+    
+    <div class="container">
+        <div class="content-card">
+            <h2 class="section-title">Create New Announcement</h2>
+            <form method="POST">
+                <label style="color:#2c3e50;font-weight:bold">Title:</label>
+                <input type="text" name="title" placeholder="Enter notification title" required>
+                
+                <label style="color:#2c3e50;font-weight:bold">Target Audience:</label>
+                <select name="target_role" required>
+                    <option value="all">All Users</option>
+                    <option value="student">Students Only</option>
+                    <option value="teacher">Teachers Only</option>
+                </select>
+                
+                <label style="color:#2c3e50;font-weight:bold">Message:</label>
+                <textarea name="message" placeholder="Enter your message here..." required></textarea>
+                
+                <button type="submit" class="btn">📤 Send Notification</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

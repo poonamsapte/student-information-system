@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Results</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:Arial;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);min-height:100vh}
+        .navbar{background:rgba(44,62,80,0.95);padding:15px 30px;display:flex;justify-content:space-between;align-items:center}
+        .navbar h1{color:white}
+        .nav-links button{background:#3498db;color:white;border:none;padding:10px 20px;margin:0 5px;border-radius:5px;cursor:pointer}
+        .container{max-width:1200px;margin:40px auto;padding:20px}
+        .content-card{background:rgba(255,255,255,0.95);padding:30px;border-radius:15px;box-shadow:0 10px 30px rgba(0,0,0,0.2)}
+        .section-title{color:#2c3e50;margin-bottom:20px;font-size:28px}
+        table{width:100%;border-collapse:collapse;margin-top:20px;background:white;box-shadow:0 5px 15px rgba(0,0,0,0.1)}
+        th{background:#2c3e50;color:white;padding:15px;text-align:left}
+        td{padding:12px;border-bottom:1px solid #ddd}
+        .grade-O{color:#2ecc71;font-weight:bold}
+        .grade-A{color:#3498db;font-weight:bold}
+        .grade-B{color:#f39c12;font-weight:bold}
+        .grade-C{color:#e74c3c;font-weight:bold}
+        .grade-F{color:#c0392b;font-weight:bold}
+        .flash-messages{position:fixed;top:80px;right:20px;z-index:1000}
+        .alert{padding:15px 20px;margin-bottom:10px;border-radius:5px;background:white;box-shadow:0 5px 15px rgba(0,0,0,0.2)}
+        .alert-success{border-left:4px solid #2ecc71;color:#27ae60}
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <h1>📊 My Results</h1>
+        <div class="nav-links">
+            <button onclick="location.href='/student/dashboard'">Back to Dashboard</button>
+        </div>
+    </div>
+    
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="flash-messages">
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+    
+    <div class="container">
+        <div class="content-card">
+            <h2 class="section-title">Academic Results</h2>
+            {% if results %}
+            <table>
+                <thead>
+                    <tr><th>Course</th><th>Marks</th><th>Total</th><th>Grade</th><th>Exam Type</th><th>Date</th></tr>
+                </thead>
+                <tbody>
+                    {% for result in results %}
+                    <tr>
+                        <td>{{ result[0] }}</td>
+                        <td>{{ result[1] }}</td>
+                        <td>{{ result[2] }}</td>
+                        <td class="grade-{{ result[3]|replace('+', '') }}">{{ result[3] }}</td>
+                        <td>{{ result[4] }}</td>
+                        <td>{{ result[5] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <p style="color:#7f8c8d;text-align:center;padding:40px">No results published yet.</p>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

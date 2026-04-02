@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Teacher Login</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial;
+height:100vh;
+background-image:url("https://images.unsplash.com/photo-1513258496099-48168024aec0");
+background-size:cover;
+background-position:center;
+background-repeat: no-repeat;
+}
+
+.box{
+
+width:350px;
+padding:30px;
+
+background:rgba(255,255,255,0.9);
+
+position:absolute;
+top:50%;
+left:50%;
+
+transform:translate(-50%,-50%) scale(0.5);
+
+animation:zoom 1s forwards;
+
+border-radius:10px;
+
+z-index:1;
+
+}
+
+@keyframes zoom{
+to{
+transform:translate(-50%,-50%) scale(1);
+}
+}
+
+h2{
+text-align:center;
+}
+
+input{
+width:100%;
+padding:10px;
+margin:8px 0;
+}
+
+button{
+width:100%;
+padding:10px;
+background:green;
+color:white;
+border:none;
+}
+
+button:hover{
+background:darkgreen;
+}
+
+
+/* navbar */
+
+.navbar{
+position:absolute;
+top:10px;
+right:10px;
+z-index:1000;
+}
+
+.navbar button{
+padding:8px;
+margin:3px;
+background:#2c3e50;
+color:white;
+border:none;
+border-radius:5px;
+cursor:pointer;
+width:auto;
+}
+
+.navbar button:hover{
+background:#1a252f;
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+<div class="navbar">
+
+<button onclick="location.href='/'">Home</button>
+<button onclick="location.href='/admin'">Admin</button>
+<button onclick="location.href='/teacher'">Teacher</button>
+<button onclick="location.href='/student'">Student</button>
+<button onclick="location.href='/courses'">Courses</button>
+<button onclick="location.href='/results'">Results</button>
+<button onclick="location.href='/contact'">Contact</button>
+<button onclick="location.href='/dashboard'">Dashboard</button>
+<button onclick="location.href='/login'">Login</button>
+
+</div>
+
+
+<div class="box">
+
+<h2>Teacher Login</h2>
+
+<form method="POST" action="/teacher">
+
+<input type="text" name="username" placeholder="Teacher ID">
+
+<input type="password" name="password" placeholder="Password">
+
+<button>Login</button>
+
+</form>
+
+</div>
+
+</body>
+</html>

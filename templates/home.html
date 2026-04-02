@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Admin Panel</title>
+
+<style>
+body{
+    font-family: Arial;
+    background:#f2f2f2;
+    text-align:center;
+}
+
+table{
+    margin:auto;
+    border-collapse:collapse;
+    width:70%;
+    background:white;
+}
+
+th,td{
+    padding:10px;
+    border:1px solid black;
+}
+
+th{
+    background:#2c3e50;
+    color:white;
+}
+</style>
+
+</head>
+
+<body>
+
+<h2>Student Information (Admin)</h2>
+
+<table>
+
+<tr>
+<th>ID</th>
+<th>Name</th>
+<th>Age</th>
+<th>Department</th>
+</tr>
+
+{% for s in students %}
+<tr>
+<td>{{ s[0] }}</td>
+<td>{{ s[1] }}</td>
+<td>{{ s[2] }}</td>
+<td>{{ s[3] }}</td>
+</tr>
+{% endfor %}
+
+</table>
+
+</body>
+</html>

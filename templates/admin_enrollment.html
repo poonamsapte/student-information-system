@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Course Enrollment - Admin</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:Arial;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);min-height:100vh}
+        .navbar{background:rgba(44,62,80,0.95);padding:15px 30px;display:flex;justify-content:space-between;align-items:center}
+        .navbar h1{color:white;font-size:24px}
+        .nav-links button{background:#3498db;color:white;border:none;padding:10px 20px;margin:0 5px;border-radius:5px;cursor:pointer}
+        .container{max-width:1000px;margin:40px auto;padding:20px}
+        .content-card{background:rgba(255,255,255,0.95);padding:30px;border-radius:15px;box-shadow:0 10px 30px rgba(0,0,0,0.2)}
+        .section-title{color:#2c3e50;margin-bottom:20px;font-size:28px}
+        .form-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:15px;margin-bottom:20px}
+        select{width:100%;padding:12px;border:1px solid #ddd;border-radius:5px;font-size:14px}
+        .btn{background:#667eea;color:white;border:none;padding:12px 25px;border-radius:5px;cursor:pointer;font-size:16px}
+        .btn:hover{background:#5568d3}
+        table{width:100%;border-collapse:collapse;margin-top:20px;background:white;box-shadow:0 5px 15px rgba(0,0,0,0.1)}
+        th{background:#2c3e50;color:white;padding:15px;text-align:left}
+        td{padding:12px;border-bottom:1px solid #ddd}
+        .flash-messages{position:fixed;top:80px;right:20px;z-index:1000}
+        .alert{padding:15px 20px;margin-bottom:10px;border-radius:5px;background:white;box-shadow:0 5px 15px rgba(0,0,0,0.2)}
+        .alert-success{border-left:4px solid #2ecc71;color:#27ae60}
+        .alert-error{border-left:4px solid #e74c3c;color:#c0392b}
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <h1>📚 Course Enrollment</h1>
+        <div class="nav-links">
+            <button onclick="location.href='/admin/dashboard'">Dashboard</button>
+            <button onclick="location.href='/admin/students'">Back to Students</button>
+        </div>
+    </div>
+    
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="flash-messages">
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+    
+    <div class="container">
+        <div class="content-card">
+            <h2 class="section-title">Enroll Student in Course</h2>
+            
+            <form method="POST" style="margin-bottom:30px">
+                <div class="form-row">
+                    <div>
+                        <label style="color:#2c3e50;font-weight:bold;display:block;margin-bottom:8px">Select Student:</label>
+                        <select name="student_id" required>
+                            <option value="">-- Choose Student --</option>
+                            {% for student in students %}
+                                <option value="{{ student[0] }}">{{ student[1] }} ({{ student[2] }})</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div>
+                        <label style="color:#2c3e50;font-weight:bold;display:block;margin-bottom:8px">Select Course:</label>
+                        <select name="course_id" required>
+                            <option value="">-- Choose Course --</option>
+                            {% for course in courses %}
+                                <option value="{{ course[0] }}">{{ course[1] }} ({{ course[2] }})</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" class="btn">✅ Enroll Student</button>
+            </form>
+            
+            <h3 style="color:#2c3e50;margin-bottom:15px">Current Enrollments</h3>
+            
+            {% if enrollments %}
+            <table>
+                <thead>
+                    <tr><th>Student ID</th><th>Student Name</th><th>Course Name</th><th>Course Code</th><th>Enrollment Date</th></tr>
+                </thead>
+                <tbody>
+                    {% for enrollment in enrollments %}
+                    <tr>
+                        <td>{{ enrollment[0] }}</td>
+                        <td>{{ enrollment[1] }}</td>
+                        <td>{{ enrollment[2] }}</td>
+                        <td>{{ enrollment[3] }}</td>
+                        <td>{{ enrollment[4] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <p style="color:#7f8c8d;text-align:center;padding:20px">No enrollments yet.</p>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

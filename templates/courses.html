@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Courses</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial;
+
+/* education background */
+height:100vh;
+background-image:url("https://images.unsplash.com/photo-1524995997946-a1c2e315a42f");
+background-size:cover;
+background-position:center;
+background-repeat: no-repeat;
+}
+
+/* animation box */
+.box{
+
+width:400px;
+margin:100px auto;
+padding:20px;
+
+background:rgba(255,255,255,0.9);
+
+border-radius:10px;
+
+animation:fade 1s;
+
+}
+
+@keyframes fade{
+
+from{opacity:0; transform:scale(0.5)}
+to{opacity:1; transform:scale(1)}
+
+}
+
+h2{
+text-align:center;
+}
+
+ul{
+font-size:18px;
+}
+.navbar{
+position:absolute;
+top:10px;
+right:10px;
+}
+
+.navbar button{
+padding:8px;
+margin:3px;
+background:#2c3e50;
+color:white;
+border:none;
+border-radius:5px;
+cursor:pointer;
+}
+
+.navbar button:hover{
+background:#1a252f;
+}
+.navbar{
+position:absolute;
+top:10px;
+right:10px;
+}
+
+.navbar button{
+padding:8px;
+margin:3px;
+background:#2c3e50;
+color:white;
+border:none;
+border-radius:5px;
+cursor:pointer;
+}
+
+.navbar button:hover{
+background:#1a252f;
+}
+</style>
+
+</head>
+
+<body>
+<div class="navbar">
+
+<button onclick="location.href='/'">Home</button>
+
+<button onclick="location.href='/admin'">Admin</button>
+
+<button onclick="location.href='/teacher'">Teacher</button>
+
+<button onclick="location.href='/student'">Student</button>
+
+<button onclick="location.href='/courses'">Courses</button>
+
+<button onclick="location.href='/results'">Results</button>
+
+<button onclick="location.href='/contact'">Contact</button>
+
+<button onclick="location.href='/dashboard'">Dashboard</button>
+
+<button onclick="location.href='/login'">Login</button>
+
+</div>
+<div class="box">
+
+<h2>Courses Offered</h2>
+
+<ul>
+
+<li>BCA</li>
+<li>BCS</li>
+<li>BSc Computer</li>
+<li>MCA</li>
+<li>MSc IT</li>
+<li>Web Development</li>
+
+</ul>
+
+</div>
+<div class="navbar">
+
+<button onclick="location.href='/'">Home</button>
+
+<button onclick="location.href='/admin'">Admin</button>
+
+<button onclick="location.href='/teacher'">Teacher</button>
+
+<button onclick="location.href='/student'">Student</button>
+
+<button onclick="location.href='/courses'">Courses</button>
+
+<button onclick="location.href='/results'">Results</button>
+
+<button onclick="location.href='/contact'">Contact</button>
+
+<button onclick="location.href='/dashboard'">Dashboard</button>
+
+<button onclick="location.href='/login'">Login</button>
+
+</div>
+</body>
+</html>

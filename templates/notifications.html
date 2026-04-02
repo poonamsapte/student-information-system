@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Notifications</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:Arial;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);min-height:100vh}
+        .navbar{background:rgba(44,62,80,0.95);padding:15px 30px;display:flex;justify-content:space-between;align-items:center}
+        .navbar h1{color:white}
+        .nav-links button{background:#3498db;color:white;border:none;padding:10px 20px;margin:0 5px;border-radius:5px;cursor:pointer}
+        .container{max-width:1000px;margin:40px auto;padding:20px}
+        .content-card{background:rgba(255,255,255,0.95);padding:30px;border-radius:15px;box-shadow:0 10px 30px rgba(0,0,0,0.2)}
+        .section-title{color:#2c3e50;margin-bottom:20px;font-size:28px}
+        .notification{background:#f8f9fa;padding:20px;margin:15px 0;border-radius:10px;border-left:5px solid #667eea}
+        .notification h4{color:#2c3e50;margin-bottom:10px}
+        .notification p{color:#555;line-height:1.6}
+        .notification-meta{color:#95a5a6;font-size:12px;margin-top:10px}
+        .flash-messages{position:fixed;top:80px;right:20px;z-index:1000}
+        .alert{padding:15px 20px;margin-bottom:10px;border-radius:5px;background:white;box-shadow:0 5px 15px rgba(0,0,0,0.2)}
+        .alert-success{border-left:4px solid #2ecc71;color:#27ae60}
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <h1>📢 Notifications</h1>
+        <div class="nav-links">
+            <button onclick="location.href='/'">Home</button>
+            <button onclick="location.href='/dashboard'">Dashboard</button>
+        </div>
+    </div>
+    
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="flash-messages">
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+    
+    <div class="container">
+        <div class="content-card">
+            <h2 class="section-title">Latest Announcements</h2>
+            {% if notifications %}
+                {% for notification in notifications %}
+                <div class="notification">
+                    <h4>{{ notification[0] }}</h4>
+                    <p>{{ notification[1] }}</p>
+                    <div class="notification-meta">
+                        Posted by: {{ notification[3] }} | {{ notification[2] }}
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <p style="color:#7f8c8d;text-align:center;padding:40px">No new notifications at the moment.</p>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

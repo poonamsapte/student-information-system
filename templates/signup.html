@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Sign Up - SIS</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Arial;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);height:100vh;display:flex;justify-content:center;align-items:center}
+.container{background:rgba(255,255,255,0.95);padding:40px;border-radius:15px;box-shadow:0 10px 30px rgba(0,0,0,0.3);width:450px}
+h1{color:#2c3e50;text-align:center;margin-bottom:30px}
+input,select{width:100%;padding:12px;margin:10px 0;border:1px solid #ddd;border-radius:5px}
+button{width:100%;padding:12px;background:#667eea;color:white;border:none;border-radius:5px;cursor:pointer;font-size:16px;margin-top:10px}
+button:hover{background:#5568d3}
+.links{text-align:center;margin-top:20px}
+.links a{color:#667eea;text-decoration:none;margin:0 10px}
+.flash-messages{position:fixed;top:20px;right:20px;z-index:1000}
+.alert{padding:15px 20px;margin-bottom:10px;border-radius:5px;background:white;box-shadow:0 5px 15px rgba(0,0,0,0.2)}
+.alert-success{border-left:4px solid #2ecc71;color:#27ae60}
+.alert-error{border-left:4px solid #e74c3c;color:#c0392b}
+</style>
+</head>
+<body>
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        <div class="flash-messages">
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">{{ message }}</div>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endwith %}
+
+<div class="container">
+    <h1>📝 Create Account</h1>
+    <form method="POST">
+        <input type="text" name="username" placeholder="Username" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <select name="role" required>
+            <option value="">Select Role</option>
+            <option value="student">Student</option>
+            <option value="teacher">Teacher</option>
+        </select>
+        <button type="submit">Sign Up</button>
+    </form>
+    <div class="links">
+        <p>Already have an account? <a href="/login">Login</a></p>
+        <p><a href="/">Back to Home</a></p>
+    </div>
+</div>
+</body>
+</html>
